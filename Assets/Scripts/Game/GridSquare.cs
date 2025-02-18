@@ -1,14 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using Newtonsoft.Json.Linq;
-using UnityEditor.XR;
-using static GameEvents;
-using System.Xml.Serialization;
+using Unity.VisualScripting;
 
 public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPointerUpHandler, IPointerExitHandler
 {
@@ -19,6 +12,17 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
 
     private bool selected = false;
     private int square_index = -1;
+    private bool isDefaultValue = false;
+
+    public void SetHasDefaultValue(bool aIsDefault)
+    {
+        isDefaultValue = aIsDefault;
+    }
+
+    public bool GetIsDeaultValue()
+    {
+        return isDefaultValue;
+    }
 
     public bool IsSelected() { return selected; }
     public void SetSquareIndex(int index)
@@ -84,7 +88,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
 
     public void OnSetNumber(int aNumber)
     {
-        if (selected)
+        if (selected && !isDefaultValue)
         {
             SetNumber(aNumber);
 
@@ -95,6 +99,7 @@ public class GridSquare : Selectable, IPointerClickHandler, ISubmitHandler, IPoi
             }
             else
             {
+                isDefaultValue = true;
                 number_text.GetComponent<Text>().color = Color.black;
             }
         }

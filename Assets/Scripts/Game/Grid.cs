@@ -86,6 +86,7 @@ public class NewBehaviourScript : MonoBehaviour
         {
             grid_squares[i].GetComponent<GridSquare>().SetNumber(aData.unsolved_data[i]);
             grid_squares[i].GetComponent<GridSquare>().SetCorrectNumber(aData.solved_data[i]);
+            grid_squares[i].GetComponent<GridSquare>().SetHasDefaultValue(aData.unsolved_data[i] != 0 && aData.unsolved_data[i] == aData.solved_data[i]);
         }     
     }
 }

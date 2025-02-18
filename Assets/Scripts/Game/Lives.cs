@@ -6,6 +6,7 @@ using UnityEngine;
 public class Lives : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI text_error;
+    [SerializeField] GameObject GameOver;
     [SerializeField] int totalLive = 3;
     int lives = 0;
     int error_number = 0;
@@ -24,6 +25,16 @@ public class Lives : MonoBehaviour
             lives--;
             text_error.text = error_number.ToString();
             text_error.color = Color.red;
+        }
+
+        CheckForGameOver();
+    }
+
+    private void CheckForGameOver()
+    {
+        if (lives <= 0 )
+        {
+            GameOver.SetActive( true );
         }
     }
 
